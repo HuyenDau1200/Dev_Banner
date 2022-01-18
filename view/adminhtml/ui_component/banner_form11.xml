@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">
+				banner_form.banner_form_data_source
+			</item>
+		</item>
+		<item name="label" xsi:type="string" translate="true">
+			Post Information
+		</item>
+		<item name="reverseMetadataMerge" xsi:type="boolean">
+			true
+		</item>
+		<item name="template" xsi:type="string">
+			templates/form/collapsible
+		</item>
+	</argument>
+	<settings>
+		<!-- <buttons>
+			<button name="back">
+			<url path="banner/index/index" />
+			<class>
+			back
+			</class>
+			<label translate="true">
+			Back
+			</label>
+			</button>
+			<button name="save">
+			<url path="banner/index/save" />
+			<class>
+			primary
+			</class>
+			<label translate="true">
+			Save
+			</label>
+			</button>
+			<button name="save" class="Dev\Banner\Block\Adminhtml\Banner\Edit\SaveButton" />
+			<button name="delete" class="Dev\Banner\Block\Adminhtml\Banner\Edit\DeleteButton" />
+			<button name="back" class="Dev\Banner\Block\Adminhtml\Banner\Edit\BackButton" />
+		</buttons> -->
+		<!--
+		<namespace>
+		banner_form
+		</namespace>
+		-->
+		<dataScope>
+			data
+		</dataScope>
+		<!--
+		<layout>
+		<navContainerName>left</navContainerName>
+		<type>tabs</type>
+		</layout>
+		-->
+		<deps>
+			<dep>
+				banner_form.banner_form_data_source
+			</dep>
+		</deps>
+	</settings>
+	<dataSource name="banner_form_data_source">
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">
+					Magento_Ui/js/form/provider
+				</item>
+			</item>
+		</argument>
+		<settings>
+			<submitUrl path="banner/index/save" />
+			<validateUrl path="banner/index/validate" />
+		</settings>
+		<dataProvider class="Dev\Banner\Model\Config\DataProvider" name="banner_form_data_source">
+			<settings>
+				<requestFieldName>
+					id
+				</requestFieldName>
+				<primaryFieldName>
+					banner_id
+				</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<fieldset name="general" sortOrder="10">
+		<settings>
+			<label translate="true">
+				Banner Details
+			</label>
+		</settings>
+		<!-- Column Name -->
+		<field name="name" formElement="input">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">
+						banner
+					</item>
+				</item>
+			</argument>
+			<settings>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">
+						true
+					</rule>
+					<rule name="max_text_length" xsi:type="number">
+						255
+					</rule>
+				</validation>
+				<label translate="true">
+					Name
+				</label>
+				<dataType>
+					text
+				</dataType>
+				<visible>
+					true
+				</visible>
+			</settings>
+		</field>
+		<!-- Image Column -->
+		<!--
+		<field name="image" formElement="imageUploader">
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="source" xsi:type="string">
+		banner
+		</item>
+		</item>
+		<item name="notice" xsi:type="string"><![CDATA[Allowed file types:jpg, jpeg, png.]]></item>
+		</argument>
+		<settings>
+		<elementTmpl>
+		ui/form/element/uploader/image
+		</elementTmpl>
+		<label translate="true">
+		Image
+		</label>
+		<componentType>
+		imageUploader
+		</componentType>
+		<validation>
+		<rule name="required-entry" xsi:type="boolean">
+		true
+		</rule>
+		</validation>
+		</settings>
+		<formElements>
+		<imageUploader>
+		<settings>
+		<previewTmpl>
+		ui/form/element/uploader/preview
+		</previewTmpl>
+		<openDialogTitle>
+		Media Gallery
+		</openDialogTitle>
+		<allowedExtensions>
+		jpg jpeg gif png svg
+		</allowedExtensions>
+		<maxFileSize>
+		4194304
+		</maxFileSize>
+		<uploaderConfig>
+		<param xsi:type="string" name="url">
+		banner/image/upload
+		</param>
+		</uploaderConfig>
+		</settings>
+		</imageUploader>
+		</formElements>
+		</field>
+		-->
+		<field name="image">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">
+						string
+					</item>
+					<item name="label" xsi:type="string" translate="true">
+						Image
+					</item>
+					<item name="formElement" xsi:type="string">
+						fileUploader
+					</item>
+					<item name="elementTmpl" xsi:type="string">
+						ui/form/element/uploader/uploader
+					</item>
+					<item name="previewTmpl" xsi:type="string">
+						ui/form/element/uploader/preview
+					</item>
+					<item name="sortOrder" xsi:type="number">
+						10
+					</item>
+					<item name="required" xsi:type="boolean">
+						true
+					</item>
+					<item name="allowedExtensions" xsi:type="string">
+						jpg jpeg gif png svg
+					</item>
+					<item name="uploaderConfig" xsi:type="array">
+						<item name="url" xsi:type="url" path="banner/upload/uploadImage" />
+					</item>
+					<item name="notice" xsi:type="string">
+						<![CDATA[Allowed file types:jpg, jpeg, png.]]>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<!-- Status Column -->
+		<!-- Cach 1: Dung select field -->
+		<!--
+		<field name="status" formElement="select">
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="validation" xsi:type="array">
+		<item name="required-entry" xsi:type="boolean">
+		true
+		</item>
+		</item>
+		</item>
+		</argument>
+		<settings>
+		<dataType>
+		text
+		</dataType>
+		<label translate="true">
+		Status
+		</label>
+		<dataScope>
+		status
+		</dataScope>
+		</settings>
+		<formElements>
+		<select>
+		<settings>
+		<options class="Dev\Banner\Model\Config\Status" />
+		</settings>
+		</select>
+		</formElements>
+		</field>
+		-->
+		<!-- # Cach 2: Dung on/off toggle -->
+		<field name="status" component="Magento_Ui/js/form/element/single-checkbox-toggle-notice" formElement="checkbox">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="default" xsi:type="number">
+						0
+					</item>
+					<item name="notices" xsi:type="array">
+						<item name="0" xsi:type="string" translate="true">
+							Disabled
+						</item>
+						<item name="1" xsi:type="string" translate="true">
+							Enabled
+						</item>
+					</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>
+					boolean
+				</dataType>
+				<label translate="true">
+					Status
+				</label>
+			</settings>
+			<formElements>
+				<checkbox>
+					<settings>
+						<valueMap>
+							<map name="false" xsi:type="number">
+								0
+							</map>
+							<map name="true" xsi:type="number">
+								1
+							</map>
+						</valueMap>
+						<prefer>
+							toggle
+						</prefer>
+					</settings>
+				</checkbox>
+			</formElements>
+		</field>
+		<!-- Example Status using Multi select -->
+		<!--
+		<field name="statuss" formElement="multiselect">
+		<settings>
+		<dataType>text</dataType>
+		<label translate="true">Statuss</label>
+		<dataScope>multiselect_example</dataScope>
+		</settings>
+		<formElements>
+		<multiselect>
+		<settings>
+		<options class="Dev\Banner\Model\Config\Status"/>
+		</settings>
+		</multiselect>
+		</formElements>
+		</field>
+		-->
+		<!-- Short Description Column -->
+		<field name="short_description" formElement="textarea">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">
+						banner
+					</item>
+					<item name="cols" xsi:type="number">
+						15
+					</item>
+					<item name="rows" xsi:type="number">
+						10
+					</item>
+				</item>
+			</argument>
+			<settings>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">
+						false
+					</rule>
+				</validation>
+				<label translate="true">
+					Short Description
+				</label>
+				<dataType>
+					text
+				</dataType>
+				<visible>
+					true
+				</visible>
+			</settings>
+		</field>
+		<!-- Example for Data component -->
+		<!--
+		<field name="date_example" formElement="date">
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="source" xsi:type="string">some_source</item>
+		</item>
+		</argument>
+		<settings>
+		<validation>
+		<rule name="validate-date" xsi:type="boolean">true</rule>
+		</validation>
+		<dataType>text</dataType>
+		<label translate="true">Created At</label>
+		<visible>true</visible>
+		<dataScope>some_scope</dataScope>
+		</settings>
+		</field>
+		-->
+		<!-- WYSIWYG Component - Trình soạn thảo (editor) -->
+		<field name="wysiwyg_example" sortOrder="50" formElement="wysiwyg">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="wysiwygConfigData" xsi:type="array">
+						<item name="height" xsi:type="string">
+							100px
+						</item>
+						<item name="width" xsi:type="string">
+							700px
+						</item>
+						<item name="add_variables" xsi:type="boolean">
+							true
+						</item>
+						<item name="add_widgets" xsi:type="boolean">
+							true
+						</item>
+						<item name="add_images" xsi:type="boolean">
+							true
+						</item>
+						<item name="add_directives" xsi:type="boolean">
+							true
+						</item>
+					</item>
+				</item>
+			</argument>
+			<settings>
+				<label>
+					Detail Page
+				</label>
+			</settings>
+			<formElements>
+				<wysiwyg>
+					<settings>
+						<rows>
+							5
+						</rows>
+						<wysiwyg>
+							true
+						</wysiwyg>
+					</settings>
+				</wysiwyg>
+			</formElements>
+		</field>
+	</fieldset>
+</form>

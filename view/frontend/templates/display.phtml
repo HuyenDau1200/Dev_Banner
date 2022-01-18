@@ -1,0 +1,13 @@
+<?php
+
+/** @var \Dev\Banner\Block\Template $block */
+$viewModel = $block->getData('view_model');
+// $bannerData = $viewModel->getBannerById(2);
+// $bannerInfo = $bannerData->getData();
+$dataBreadcumbs=$viewModel->getCrumbs();
+dd($dataBreadcumbs);
+//echo $bannerInfo['name'];
+
+//     $listBanner=$viewModel->getListBanner();
+//     dd($listBanner->getData());
+?>

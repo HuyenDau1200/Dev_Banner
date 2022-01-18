@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">
+				banner_listing.banner_listing_data_source
+			</item>
+			<item name="deps" xsi:type="string">
+				banner_listing.banner_listing_data_source
+			</item>
+		</item>
+		<item name="spinner" xsi:type="string">
+			banner_columns
+		</item>
+		<!-- Add Button -->
+		<item name="buttons" xsi:type="array">
+			<item name="fb" xsi:type="array">
+				<item name="name" xsi:type="string">
+					fb
+				</item>
+				<item name="label" xsi:type="string">
+					Contact me
+				</item>
+				<item name="url" xsi:type="string">
+					https://www.facebook.com/huyen.dau.90281/
+				</item>
+			</item>
+			<item name="add" xsi:type="array">
+				<item name="name" xsi:type="string">
+					add
+				</item>
+				<item name="label" xsi:type="string">
+					Add new banner
+				</item>
+				<item name="class" xsi:type="string">
+					primary
+				</item>
+				<item name="url" xsi:type="string">
+					banner/index/newAction
+				</item>
+			</item>
+		</item>
+	</argument>
+	<!-- Config DataSource - DataProvider -->
+	<dataSource name="banner_listing_data_source">
+		<argument name="dataProvider" xsi:type="configurableObject">
+			<argument name="class" xsi:type="string">
+				Dev\Banner\Ui\DataProvider\Banner\ListingDataProvider
+			</argument>
+			<argument name="name" xsi:type="string">
+				banner_listing_data_source
+			</argument>
+			<argument name="primaryFieldName" xsi:type="string">
+				banner_id
+			</argument>
+			<argument name="requestFieldName" xsi:type="string">
+				banner_id
+			</argument>
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="update_url" xsi:type="url" path="mui/index/render" />
+					<item name="storageConfig" xsi:type="array">
+						<item name="indexField" xsi:type="string">
+							banner_id
+						</item>
+					</item>
+				</item>
+			</argument>
+		</argument>
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">
+					Magento_Ui/js/grid/provider
+				</item>
+			</item>
+		</argument>
+	</dataSource>
+	<!-- Listing Toolbar -->
+	<listingToolbar name="listing_top">
+		<!-- Bookmark - danh dau trang -->
+		<bookmark name="bookmarks" />
+		<!-- Column Controls - Chon cot hien thi len grid -->
+		<columnsControls name="columns_controls" />
+		<!-- Filter Seach - bo loc tim kiem theo keyword -->
+		<filterSearch name="fulltext" />
+		<!-- Massaction - xoa 1 hoac nhieu dong -->
+		<massaction name="listing_massaction">
+			<argument name="data" xsi:type="array">
+				<item name="data" xsi:type="array">
+					<item name="selectProvider" xsi:type="string">
+						banner_listing.banner_listing.banner_columns.ids
+					</item>
+					<item name="displayArea" xsi:type="string">
+						bottom
+					</item>
+					<item name="component" xsi:type="string">
+						Magento_Ui/js/grid/tree-massactions
+					</item>
+					<item name="indexField" xsi:type="string">
+						banner_id
+					</item>
+				</item>
+			</argument>
+			<action name="delete">
+				<argument name="data" xsi:type="array">
+					<item name="config" xsi:type="array">
+						<item name="type" xsi:type="string">
+							delete
+						</item>
+						<item name="label" xsi:type="string" translate="true">
+							Delete
+						</item>
+						<item name="url" xsi:type="url" path="banner/index/massDelete" />
+						<item name="confirm" xsi:type="array">
+							<item name="title" xsi:type="string" translate="true">
+								Delete items
+							</item>
+							<item name="message" xsi:type="string" translate="true">
+								Are you sure you want to delete selected items?
+							</item>
+						</item>
+					</item>
+				</argument>
+			</action>
+		</massaction>
+		<!-- Filters -->
+		<filters name="listing_filters">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="templates" xsi:type="array">
+						<item name="filters" xsi:type="array">
+							<item name="select" xsi:type="array">
+								<item name="component" xsi:type="string">
+									Magento_Ui/js/form/element/ui-select
+								</item>
+								<item name="template" xsi:type="string">
+									ui/grid/filters/elements/ui-select
+								</item>
+							</item>
+						</item>
+					</item>
+				</item>
+			</argument>
+		</filters>
+		<paging name="listing_paging" />
+		<exportButton name="export_button" />
+	</listingToolbar>
+	<!-- columns in table -->
+	<columns name="banner_columns">
+		<!-- Config Inline Edit -->
+		<settings>
+			<editorConfig>
+				<param name="selectProvider" xsi:type="string">
+					banner_listing.banner_listing.banner_columns.ids
+				</param>
+				<param name="enabled" xsi:type="boolean">
+					true
+				</param>
+				<param name="indexField" xsi:type="string">
+					banner_id
+				</param>
+				<param name="clientConfig" xsi:type="array">
+					<item name="saveUrl" path="banner/index/inlineEdit" xsi:type="url" />
+					<item name="validateBeforeSave" xsi:type="boolean">
+						false
+					</item>
+				</param>
+			</editorConfig>
+			<childDefaults>
+				<param name="fieldAction" xsi:type="array">
+					<item name="provider" xsi:type="string">
+						banner_listing.banner_listing.banner_columns_editor
+					</item>
+					<item name="target" xsi:type="string">
+						startEdit
+					</item>
+					<item name="params" xsi:type="array">
+						<item name="0" xsi:type="string">
+							${ $.$data.rowIndex }
+						</item>
+						<item name="1" xsi:type="boolean">
+							true
+						</item>
+					</item>
+				</param>
+			</childDefaults>
+		</settings>
+		<!-- SelectionsColum -cho phep chon 1 hoac nhieu cot de thuc thi -->
+		<selectionsColumn name="ids">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="indexField" xsi:type="string">
+						banner_id
+					</item>
+				</item>
+			</argument>
+		</selectionsColumn>
+		<!-- Add Column -->
+		<!-- Banner Id -->
+		<column name="banner_id">
+			<settings>
+				<filter>
+					textRange
+				</filter>
+				<label translate="true">
+					ID
+				</label>
+				<resizeDefaultWidth>
+					25
+				</resizeDefaultWidth>
+			</settings>
+		</column>
+		<!-- Column Image -->
+		<column name="image" class="Dev\Banner\Ui\Component\Banner\Listing\Column\Thumbnail">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="align" xsi:type="string">left</item>
+					<item name="component" xsi:type="string">
+						Magento_Ui/js/grid/columns/thumbnail
+					</item>
+					<item name="sortable" xsi:type="boolean">
+						false
+					</item>
+					<item name="altField" xsi:type="string">
+						name
+					</item>
+					<item name="has_preview" xsi:type="string">
+						1
+					</item>
+					<item name="label" xsi:type="string" translate="true">
+						Banner Image
+					</item>
+					<item name="resizeDefaultWidth" xsi:type="number">40</item>
+				</item>
+			</argument>
+		</column>
+		<!-- Column Name -->
+		<column name="name">  
+			<settings>
+				<filter>
+					text
+				</filter>
+				<editor>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">
+							true
+						</rule>
+					</validation>
+					<editorType>
+						text
+					</editorType>
+				</editor>
+				<dataType>
+					text
+				</dataType>
+				<bodyTmpl>
+					ui/grid/cells/text
+				</bodyTmpl>
+				<label translate="true">
+					Name
+				</label>
+			</settings>
+		</column>
+		<!-- Column status using combobox to select -->
+		<column name="status">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">
+					Dev\Banner\Ui\DataProvider\Banner\Listing\Column\StatusOptions
+				</item>
+				<item name="config" xsi:type="array">
+					<item name="fieldClass" xsi:type="string">
+						a-center
+					</item>
+					<item name="filter" xsi:type="string">
+						select
+					</item>
+					<item name="component" xsi:type="string">
+						Magento_Ui/js/grid/columns/select
+					</item>
+					<item name="editor" xsi:type="string">
+						select
+					</item>
+					<item name="dataType" xsi:type="string">
+						select
+					</item>
+					<item name="label" xsi:type="string" translate="true">
+						Status
+					</item>
+				</item>
+			</argument>
+		</column>
+		<column name="short_description">
+			<settings>
+				<filter>
+					text
+				</filter>
+				<editor>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">
+							true
+						</rule>
+					</validation>
+					<editorType>
+						text
+					</editorType>
+				</editor>
+				<bodyTmpl>
+					ui/grid/cells/text
+				</bodyTmpl>
+				<label translate="true">
+					Short Description
+				</label>
+			</settings>
+		</column>
+		<!-- ActionsColumn -cot chua cac hanh dong edit action, delete or duplicate (ap dung cho tung dong) -->
+		<!-- Add 1 action -->
+		<!--
+		<actionsColumn name="actions" class="Dev\Banner\Ui\Component\Banner\Listing\Column\Actions" sortOrder="200">
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="resizeEnabled" xsi:type="boolean">
+		false
+		</item>
+		<item name="resizeDefaultWidth" xsi:type="string">
+		107
+		</item>
+		<item name="indexField" xsi:type="string">
+		banner_id
+		</item>
+		</item>
+		</argument>
+		</actionsColumn>
+		-->
+		<!-- Add nhieu action -->
+		<actionsColumn name="actions" class="Dev\Banner\Ui\Component\Banner\Listing\Column\Actions"> 
+			<settings>
+				<label translate="true">
+					Actions
+				</label>
+			</settings>
+		</actionsColumn>
+	</columns>
+</listing>

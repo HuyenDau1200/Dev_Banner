@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<!-- THỰC HÀNH VỀ CREATE LAYOUT, BLOCK, TEMPLATE -->
+		
+		<referenceContainer name="content">
+		<block class="Dev\Banner\Block\View" name="banner_index_view" template="Dev_Banner::view.phtml" />
+		</referenceContainer>
+		<referenceContainer name="footer" remove="true">
+		</referenceContainer>
+		<referenceContainer name="copyright" remove="true">
+		</referenceContainer>
+		
+
+		<!-- <referenceContainer name="content"> -->
+			<!-- ADD BREADCRUMBS -->
+			<!-- <referenceBlock name="breadcrumbs">
+				<action method="addCrumb">
+					<argument name="crumbName" xsi:type="string">
+						Home
+					</argument>
+					<argument name="crumbInfo" xsi:type="array">
+						<item name="title" xsi:type="string">
+						Home
+						</item>
+						<item name="label" xsi:type="string">
+							Home	
+						</item>
+						<item name="link" xsi:type="string">
+						</item>
+					</argument>
+				</action>
+				<action method="addCrumb">
+					<argument name="crumbName" xsi:type="string">
+						Shopping Cart
+					</argument>
+					<argument name="crumbInfo" xsi:type="array">
+						<item name="title" xsi:type="string">
+							Shopping Cart
+						</item>
+						<item name="label" xsi:type="string">
+							Shopping Cart
+						</item>
+						<item name="link" xsi:type="string">
+						</item>
+					</argument>
+				</action>
+			</referenceBlock> -->
+
+			<!-- USING VIEW MODEL  -->
+			<!-- <block name="example-view-model" class="Magento\Framework\View\Element\Template" template="Dev_Banner::display.phtml">
+				<arguments>
+					<argument name="view_model" xsi:type="object">
+						Dev\Banner\ViewModel\BannerViewModel
+					</argument>
+				</arguments>
+			</block>
+		</referenceContainer> -->
+	</body>
+</page>

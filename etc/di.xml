@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Dev\Banner\Api\BannerRepositoryInterface" type="Dev\Banner\Model\BannerRepository" />
+	<preference for="Dev\Banner\Api\Data\BannerInterface" type="Dev\Banner\Model\Banner" />
+	<type name="Dev\Banner\Ui\DataProvider\Banner\ListingDataProvider">
+		<plugin name="dev_banner_attributes" type="Dev\Banner\Plugin\AddAttributesToUiDataProvider" />
+	</type>
+	<!-- Banner Listing Data -->
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<!-- Inject 1 tham so banner_listig_data_source vào 1 class Banner\Grid\Collection -->
+				<item name="banner_listing_data_source" xsi:type="string">
+					Dev\Banner\Model\ResourceModel\Banner\Grid\Collection
+				</item>
+			</argument>
+		</arguments>
+	</type>
+	<virtualType name="Dev\Banner\Model\ResourceModel\Banner\Grid\Collection" type="Dev\Banner\Ui\DataProvider\Banner\Listing\Collection">
+		<!-- Cac tham so cua p.thuc constructor() cua class -->
+		<arguments>
+			<argument name="mainTable" xsi:type="string">
+				banner
+			</argument>
+			<argument name="resourceModel" xsi:type="string">
+				Dev\Banner\Model\ResourceModel\Banner
+			</argument>
+		</arguments>
+	</virtualType>
+	<!-- Image Upload -->
+	<virtualType name="Dev\Banner\BannerImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">banner/tmp/images</argument>
+            <argument name="basePath" xsi:type="string">banner/images</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+				<item name="svg" xsi:type="string">svg</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+				<item name="svg" xsi:type="string">image/svg</item>
+            </argument>
+        </arguments>
+    </virtualType>
+	<type name="Dev\Banner\Controller\Adminhtml\Index\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Dev\Banner\BannerImageUpload</argument>
+        </arguments>
+    </type>
+	
+	<!-- File Uploader -->
+	<!-- <virtualType name="Dev\Banner\BannerImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">banner/tmp/files</argument>
+            <argument name="basePath" xsi:type="string">banner/files</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+				<item name="svg" xsi:type="string">svg</item>
+				<item name="doc" xsi:type="string">doc</item>
+				<item name="xlsx" xsi:type="string">xlsx</item>
+				<item name="zip" xsi:type="string">zip</item>
+				<item name="csv" xsi:type="string">csv</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">file/jpg</item>
+                <item name="jpeg" xsi:type="string">file/jpeg</item>
+                <item name="gif" xsi:type="string">file/gif</item>
+                <item name="png" xsi:type="string">file/png</item>
+				<item name="svg" xsi:type="string">file/svg</item>
+				<item name="doc" xsi:type="string">file/doc</item>
+				<item name="xlsx" xsi:type="string">file/xlsx</item>
+				<item name="zip" xsi:type="string">file/zip</item>
+				<item name="csv" xsi:type="string">file/csv</item>
+            </argument>
+        </arguments>
+    </virtualType>
+	<type name="Dev\Banner\Controller\Adminhtml\Index\File\Upload">
+        <arguments>
+            <argument name="fileUploader" xsi:type="object">Dev\Banner\BannerImageUpload</argument>
+        </arguments>
+    </type> -->
+</config>
