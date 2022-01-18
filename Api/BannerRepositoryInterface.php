@@ -11,5 +11,7 @@ interface BannerRepositoryInterface
     // public function delete(BannerInterface $banner);
     //public function deleteById($id);
     //public function getList(SearchCriteriaInterface $searchCriteria);
+
+    //public function updateId($id);
 }
 
